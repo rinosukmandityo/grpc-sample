@@ -1,0 +1,12 @@
+syntax = "proto3";
+package message;
+
+option go_package = ".;message";
+
+message Text {
+	string body = 1;
+}
+
+service MessageService {
+	rpc SayHello(Text) returns (Text);
+}

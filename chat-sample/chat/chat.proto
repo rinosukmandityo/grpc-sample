@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = ".;chat";
+
+message User {
+	string id = 1;
+	string name = 2;
+}
+
+message Message {
+	User user = 1; // user id
+	string content = 2; // chat content
+	int64 timestamp = 3; // timestamp
+}
+
+message Connection {
+	User user = 1;
+	bool active = 2;
+}
+
+message Close {}
+
+service BroadcastService {
+	rpc CreateStream(Connection) returns (stream Message);
+	rpc BroadcastMessage(Message) returns (Close);
+}
